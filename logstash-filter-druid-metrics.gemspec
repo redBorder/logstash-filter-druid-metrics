@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'logstash-filter-druid-metrics'
-  s.version = '0.0.3'
+  s.version = '0.0.1'
   s.licenses = ['AGPL-3.0']
   s.summary = "This plugin allows Logstash to enrich druid metric data"
   s.description = "This plugin allows Logstash to enrich druid metric data"

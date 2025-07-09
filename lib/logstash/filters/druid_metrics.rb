@@ -13,6 +13,10 @@ module LogStash
     class DruidMetrics < LogStash::Filters::Base
       config_name 'druid_metrics'
 
+      def register
+        # Nothing to register
+      end
+
       def filter(event)
         
         # Convert timestamp to expected format

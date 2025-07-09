@@ -10,7 +10,7 @@ This is a plugin for [Logstash](https://github.com/elastic/logstash).
 #### Code
 - To get started, you'll need JRuby with the Bundler gem installed.
 
-- Clone from the GitHub [logstash-filter-threat-intelligence](https://github.com/redBorder/logstash-filter-threat-intelligence)
+- Clone from the GitHub [logstash-filter-druid-metrics](https://github.com/redBorder/logstash-filter-druid-metrics)
 
 - Install dependencies
 ```sh
@@ -39,7 +39,7 @@ You can use the same **2.1** method to run your plugin in an installed Logstash 
 
 - Build your plugin gem
 ```sh
-gem build logstash-filter-threat-intelligence.gemspec
+gem build logstash-filter-druid-metrics.gemspec
 ```
 - Install the plugin from the Logstash home
 ```sh
