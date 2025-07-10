@@ -42,7 +42,6 @@ module LogStash
             when "query/interrupted/count" then ["broker_interrupted_query", "event"]
             when "query/count" then ["broker_query_count", "event"]
             when "query/success/count" then ["broker_query_success", "event"]
-            when "serverview/sync/unstableTime" then ["broker_unstable_time", "ms"]
             else
               event.cancel
               return
@@ -56,7 +55,6 @@ module LogStash
             when "query/cpu/time" then ["historical_query_cpu_time", "ms"]
             when "segment/scan/active" then ["historical_segment_count", "event"]
             when "mergeBuffer/pendingRequests" then ["historical_pending_request", "event"]
-            when "groupBy/spilledQueries" then ["historical_spilled_queries", "event"]
             when "query/failed/count" then ["historical_failed_query", "event"]
             when "query/timeout/count" then ["historical_timeout_query", "event"]
             when "query/interrupted/count" then ["historical_interrupted_query", "event"]
