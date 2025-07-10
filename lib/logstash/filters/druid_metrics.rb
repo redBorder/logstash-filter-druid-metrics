@@ -35,25 +35,25 @@ module LogStash
         when "druid/broker"
           monitor, unit = case metric
             when "query/cache/total/sizeBytes" then ["broker_cache_size", "bytes"]
-            when "query/time" then ["broker_query_time", ""]
+            when "query/time" then ["broker_query_time", "ms"]
             when "query/bytes" then ["broker_query_return_size", "bytes"]
             when "query/failed/count" then ["broker_failed_query", "event"]
             when "query/timeout/count" then ["broker_timeout_query", "event"]
             when "query/interrupted/count" then ["broker_interrupted_query", "event"]
             when "query/count" then ["broker_query_count", "event"]
             when "query/success/count" then ["broker_query_success", "event"]
-            when "serverview/sync/unstableTime" then ["broker_unstable_time", ""]
+            when "serverview/sync/unstableTime" then ["broker_unstable_time", "ms"]
             else
               event.cancel
               return
           end
         when "historical"
           monitor, unit = case metric
-            when "query/time" then ["historical_query_time", ""]
-            when "query/segment/time" then ["historical_segmet_time", ""]
-            when "query/wait/time" then ["historical_wait_time", ""]
+            when "query/time" then ["historical_query_time", "ms"]
+            when "query/segment/time" then ["historical_segmet_time", "ms"]
+            when "query/wait/time" then ["historical_wait_time", "ms"]
             when "segment/scan/pending" then ["historical_segment_pending_count", "event"]
-            when "query/cpu/time" then ["historical_query_cpu_time", ""]
+            when "query/cpu/time" then ["historical_query_cpu_time", "ms"]
             when "segment/scan/active" then ["historical_segment_count", "event"]
             when "mergeBuffer/pendingRequests" then ["historical_pending_request", "event"]
             when "groupBy/spilledQueries" then ["historical_spilled_queries", "event"]
@@ -69,6 +69,13 @@ module LogStash
         else
           event.cancel
           return
+        end
+
+        if metric == "query/cpu/time"
+          value = event.get("value")
+          if value.is_a?(Numeric)
+            event.set("value", value / 1000.0)  # from microseconds to miliseconds
+          end
         end
 
         event.set("monitor", monitor)
