@@ -79,7 +79,7 @@ module LogStash
         event.set("monitor", monitor)
         event.set("unit", unit)
         if event.get("host")
-          event.set("sensor_name", event.get("host")[/^[^\.]+/] + "ooo")
+          event.set("sensor_name", event.get("host")[/^[^\.]+/])
         else
           event.set("sensor_name", "N/A")
         end
