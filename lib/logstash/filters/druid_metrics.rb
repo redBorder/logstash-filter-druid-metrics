@@ -78,7 +78,11 @@ module LogStash
 
         event.set("monitor", monitor)
         event.set("unit", unit)
-        event.set("sensor_name", "rb-ptorres")
+        if event.get("host")
+          event.set("sensor_name", event.get("host")[/^[^\.]+/])
+        else
+          event.set("sensor_name", "N/A")
+        end
         event.set("type", "system")
 
         ["version", "service", "feed", "metric", "host", "success", "hasFilters", "id", "remoteAddress", "duration", "interval", "context", "enableParallelMerge"].each do |field|
